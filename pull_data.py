@@ -4,13 +4,8 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from statsmodels.stats.outliers_influence import variance_inflation_factor
 
-# update the date before running
-date = "20221124"
-link_oe_data = f"https://oracleselixir-downloadable-match-data.s3-us-west-2.amazonaws.com/2022_LoL_esports_match_data_from_OraclesElixir_{date}.csv"
-
-# pull down the data   
-# data_oe = pd.read_csv(link_oe_data)
-data_oe = pd.read_csv("oe_extract.csv")
+# read the data   
+data_oe = pd.read_csv("2022_match_data.csv")
 
 # narrow the data, choose variables that are team defining, not luck, and moderated by a time metric
 data_oe_narrow = data_oe[[
