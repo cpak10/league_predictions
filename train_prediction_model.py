@@ -1,7 +1,18 @@
 import pandas as pd
 from tensorflow import keras
+import tensorflow as tf
 from sklearn.preprocessing import StandardScaler
 import joblib
+import numpy as np
+import matplotlib.pyplot as plt
+import os
+import random
+
+# set a seed for the model
+os.environ['PYTHONHASHSEED'] = str(0)
+random.seed(42)
+np.random.seed(42)
+tf.random.set_seed(42)
 
 # take in the data
 data_oe_intake = pd.read_csv("data_oe_training.csv")
@@ -21,9 +32,7 @@ joblib.dump(normalizer, 'std_scaler.bin', compress = True)
 # Build the model
 def get_model():
     model = keras.models.Sequential([
-        keras.layers.Dense(64, input_shape = (48,), kernel_regularizer=keras.regularizers.l2()),
-        keras.layers.Dense(32, kernel_regularizer=keras.regularizers.l2()),
-        keras.layers.Dense(16, kernel_regularizer=keras.regularizers.l2()),
+        keras.layers.Dense(2, input_shape = (48,), kernel_regularizer = keras.regularizers.l2()),
         keras.layers.Dense(1, activation = "sigmoid")
     ])
     model.compile(
@@ -53,3 +62,13 @@ history = model.fit(
 
 # Save model
 model.save('saved_model/league_oe_data')
+
+# save down the training and validation loss to check overfitting
+train_loss = history.history["loss"]
+val_loss = history.history["val_loss"]
+
+# plot the training and validation losses
+plt.plot(train_loss, label = "Training loss")
+plt.plot(val_loss, label = "Validation loss")
+plt.legend()
+plt.show()

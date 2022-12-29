@@ -7,8 +7,8 @@ import seaborn
 import matplotlib.pyplot as plt
 
 # inputs
-team_blue = "Evil Geniuses"
-team_red = "Team Liquid"
+team_blue = "Dignitas"
+team_red = "Immortals"
 date = "20221129"
 new_data = 0
 
