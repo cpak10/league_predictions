@@ -141,7 +141,7 @@ prediction = model.predict(normalizer.transform(data_sides_order))
 dict_prediction = {}
 for i in range(len(data_date_list)):
     dict_prediction[i] = [data_date_list[i].strftime("%m-%d"), int(prediction[i][0] * 100), team_blue]
-    dict_prediction[i +.5] = [data_date_list[i].strftime("%m-%d"), 100 - int(prediction[i][0] * 100), team_red]
+    dict_prediction[i + .5] = [data_date_list[i].strftime("%m-%d"), 100 - int(prediction[i][0] * 100), team_red]
 data_date_prediction = pd.DataFrame.from_dict(dict_prediction, orient = "index", columns = ["date", "prediction", "Team"])
 
 # bring in the model for random forest
@@ -151,8 +151,16 @@ prediction_rf = model_rf.predict_proba(normalizer_rf.transform(data_sides_order)
 dict_prediction_rf = {}
 for i in range(len(data_date_list)):
     dict_prediction_rf[i] = [data_date_list[i].strftime("%m-%d"), int(prediction_rf[i][1] * 100), team_blue]
-    dict_prediction_rf[i +.5] = [data_date_list[i].strftime("%m-%d"), int(prediction_rf[i][0] * 100), team_red]
+    dict_prediction_rf[i + .5] = [data_date_list[i].strftime("%m-%d"), int(prediction_rf[i][0] * 100), team_red]
 data_date_prediction_rf = pd.DataFrame.from_dict(dict_prediction_rf, orient = "index", columns = ["date", "prediction", "Team"])
+
+# print out results
+max_index = max(dict_prediction)
+date_final, prediction_final, _ = dict_prediction[max_index]
+_, prediction_final_rf, _ = dict_prediction_rf[max_index]
+print(f"\nNOTE: Week of Prediction: {date_final}")
+print(f"NOTE: Sequential model predictions for win: {team_blue} ({100 - prediction_final}%), {team_red} ({prediction_final}%)")
+print(f"NOTE: Random forest model predictions for win: {team_blue} ({100 - prediction_final_rf}%), {team_red} ({prediction_final_rf}%)")
 
 # plot data for sequential
 plt.figure(1)
