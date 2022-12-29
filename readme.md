@@ -12,7 +12,15 @@ There is no current method of automatically pulling data from this site. Thus, s
 including downloading and renaming the file, will need to be done manually on the local desktop.
 
 ## Order of Operations
+There are currently two different models being trained to accomplish the same goal: a sequential and a random forest.
+
+To use the sequential model to predict matches, please follow the order below:
 * pull_data.py
 * train_prediction_model.py
 * test_model.py
 * predict_win.py
+
+To use the random forest model to predict matches, please follow the order below:
+* pull_data.py
+* train_random_forest.py
+* [PREDICTION SCRIPT IN PROGRESS]

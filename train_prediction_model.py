@@ -16,7 +16,7 @@ oe_testing_label = oe_testing_features.pop("result")
 normalizer = StandardScaler()
 oe_training_features_norm = normalizer.fit_transform(oe_training_features)
 oe_testing_features_norm = normalizer.transform(oe_testing_features)
-joblib.dump(normalizer, 'std_scaler.bin', compress=True)
+joblib.dump(normalizer, 'std_scaler.bin', compress = True)
 
 # Build the model
 def get_model():
