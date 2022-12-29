@@ -13,14 +13,10 @@ including downloading and renaming the file, will need to be done manually on th
 
 ## Order of Operations
 There are currently two different models being trained to accomplish the same goal: a sequential and a random forest.
+Both models are required for the predict_win.py script. Use the following ordering for deploying the models:
 
-To use the sequential model to predict matches, please follow the order below:
 * pull_data.py
 * train_prediction_model.py
 * test_model.py
-* predict_win.py
-
-To use the random forest model to predict matches, please follow the order below:
-* pull_data.py
 * train_random_forest.py
 * predict_win.py
