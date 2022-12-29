@@ -63,7 +63,7 @@ for pred, prob, result in zip(prediction, predict_prob, y_test):
             result_by_class[bin]
         except:
             result_by_class[bin] = []
-        if round(prob[0], 2) >= bin:
+        if round(prob[1], 2) >= bin:
             if pred == result:
                 result_by_class[bin].append(1)
             else:
@@ -74,7 +74,7 @@ for pred, prob, result in zip(prediction, predict_prob, y_test):
             result_by_class[bin]
         except:
             result_by_class[bin] = []
-        if round(prob[0], 2) <= bin:
+        if round(prob[1], 2) <= bin:
             if pred == result:
                 result_by_class[bin].append(1)
             else:

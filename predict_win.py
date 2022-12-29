@@ -7,7 +7,7 @@ import seaborn
 import matplotlib.pyplot as plt
 
 # inputs
-team_blue = "Dignitas"
+team_blue = "Evil Geniuses"
 team_red = "Team Liquid"
 date = "20221129"
 new_data = 0
@@ -134,7 +134,8 @@ data_sides_order = data_sides_merged[[
     "firsttower_y_y"
 ]]
 
-# bring in the model
+"""
+# bring in the model for sequential
 normalizer = joblib.load("std_scaler.bin")
 model = keras.models.load_model("saved_model/league_oe_data")
 prediction = model.predict(normalizer.transform(data_sides_order))
@@ -142,6 +143,17 @@ dict_prediction = {}
 for i in range(len(data_date_list)):
     dict_prediction[i] = [data_date_list[i].strftime("%m-%d"), int(prediction[i][0] * 100), team_blue]
     dict_prediction[i +.5] = [data_date_list[i].strftime("%m-%d"), 100 - int(prediction[i][0] * 100), team_red]
+data_date_prediction = pd.DataFrame.from_dict(dict_prediction, orient = "index", columns = ["date", "prediction", "Team"])
+"""
+
+# bring in the model for random forest
+normalizer = joblib.load("std_scaler_rf.bin")
+model = joblib.load("model_random_forest.bin")
+prediction = model.predict_proba(normalizer.transform(data_sides_order))
+dict_prediction = {}
+for i in range(len(data_date_list)):
+    dict_prediction[i] = [data_date_list[i].strftime("%m-%d"), int(prediction[i][1] * 100), team_blue]
+    dict_prediction[i +.5] = [data_date_list[i].strftime("%m-%d"), int(prediction[i][0] * 100), team_red]
 data_date_prediction = pd.DataFrame.from_dict(dict_prediction, orient = "index", columns = ["date", "prediction", "Team"])
 
 # plot data

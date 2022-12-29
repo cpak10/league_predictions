@@ -23,4 +23,4 @@ To use the sequential model to predict matches, please follow the order below:
 To use the random forest model to predict matches, please follow the order below:
 * pull_data.py
 * train_random_forest.py
-* [PREDICTION SCRIPT IN PROGRESS]
+* predict_win.py
