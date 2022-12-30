@@ -7,8 +7,8 @@ import seaborn
 import matplotlib.pyplot as plt
 
 # inputs
-team_blue = "Dignitas"
-team_red = "Immortals"
+team_blue = "Evil Geniuses"
+team_red = "Team Liquid"
 date = "20221129"
 new_data = 0
 
@@ -158,9 +158,18 @@ data_date_prediction_rf = pd.DataFrame.from_dict(dict_prediction_rf, orient = "i
 max_index = max(dict_prediction)
 date_final, prediction_final, _ = dict_prediction[max_index]
 _, prediction_final_rf, _ = dict_prediction_rf[max_index]
-print(f"\nNOTE: Week of Prediction: {date_final}")
+print(f"\nNOTE: Last Week of Full Data: {date_final}")
 print(f"NOTE: Sequential model predictions for win: {team_blue} ({100 - prediction_final}%), {team_red} ({prediction_final}%)")
 print(f"NOTE: Random forest model predictions for win: {team_blue} ({100 - prediction_final_rf}%), {team_red} ({prediction_final_rf}%)")
+
+file_root = "C:\\Users\\Chris Pak\\OneDrive\\Documents\\League Predictions\\"
+file_path = f"{file_root}{date_final}_{team_blue}_{team_red}.txt"
+with open(file_path, "w") as file:
+    file.write(f"""
+Last Week of Full Data: {date_final}
+Sequential model predictions for win: {team_blue} ({100 - prediction_final}%), {team_red} ({prediction_final}%)
+Random forest model predictions for win: {team_blue} ({100 - prediction_final_rf}%), {team_red} ({prediction_final_rf}%)
+    """)
 
 # plot data for sequential
 plt.figure(1)
@@ -171,6 +180,7 @@ plt.title(f"Win Predictions For {team_blue} v. {team_red} (Seq)")
 plt.xticks(rotation = 90)
 plt.xlabel("End of Week Date")
 plt.ylabel("% Chance of Win")
+plt.savefig(f"{file_root}{date_final}_{team_blue}_{team_red}_seq.png")
 
 # plot data for random forest
 plt.figure(2)
@@ -181,6 +191,7 @@ plt.title(f"Win Predictions For {team_blue} v. {team_red} (RF)")
 plt.xticks(rotation = 90)
 plt.xlabel("End of Week Date")
 plt.ylabel("% Chance of Win")
+plt.savefig(f"{file_root}{date_final}_{team_blue}_{team_red}_rf.png")
 
 # show plots
 plt.show()
