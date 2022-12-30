@@ -5,6 +5,7 @@ from tensorflow import keras
 import joblib
 import seaborn
 import matplotlib.pyplot as plt
+import os
 
 # inputs
 team_blue = "Evil Geniuses"
@@ -162,7 +163,8 @@ print(f"\nNOTE: Last Week of Full Data: {date_final}")
 print(f"NOTE: Sequential model predictions for win: {team_blue} ({100 - prediction_final}%), {team_red} ({prediction_final}%)")
 print(f"NOTE: Random forest model predictions for win: {team_blue} ({100 - prediction_final_rf}%), {team_red} ({prediction_final_rf}%)")
 
-file_root = "C:\\Users\\Chris Pak\\OneDrive\\Documents\\League Predictions\\"
+user_profile = os.environ['USERPROFILE']
+file_root = f"{user_profile}\\OneDrive\\Documents\\League Predictions\\"
 file_path = f"{file_root}{date_final}_{team_blue}_{team_red}.txt"
 with open(file_path, "w") as file:
     file.write(f"""
