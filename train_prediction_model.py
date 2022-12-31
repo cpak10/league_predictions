@@ -9,13 +9,17 @@ import os
 import random
 
 # set a seed for the model
-os.environ['PYTHONHASHSEED'] = str(0)
+os.environ["PYTHONHASHSEED"] = str(0)
 random.seed(42)
 np.random.seed(42)
 tf.random.set_seed(42)
 
+# get file root
+user_profile = os.environ["USERPROFILE"]
+file_root = f"{user_profile}\\OneDrive\\Documents\\GitHub\\league_predictions"
+
 # take in the data
-data_oe_intake = pd.read_csv("data_oe_training.csv")
+data_oe_intake = pd.read_csv(f"{file_root}\\working\\data_oe_training.csv")
 
 # Split the data
 oe_training_features = data_oe_intake.sample(frac = 0.8)
@@ -27,7 +31,7 @@ oe_testing_label = oe_testing_features.pop("result")
 normalizer = StandardScaler()
 oe_training_features_norm = normalizer.fit_transform(oe_training_features)
 oe_testing_features_norm = normalizer.transform(oe_testing_features)
-joblib.dump(normalizer, 'std_scaler.bin', compress = True)
+joblib.dump(normalizer, f"{file_root}\\working\\std_scaler.bin", compress = True)
 
 # Build the model
 def get_model():
@@ -61,7 +65,7 @@ history = model.fit(
 )
 
 # Save model
-model.save('saved_model/league_oe_data')
+model.save(f"{file_root}\\working\\model_sequential")
 
 # save down the training and validation loss to check overfitting
 train_loss = history.history["loss"]

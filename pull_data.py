@@ -3,9 +3,14 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 from statsmodels.stats.outliers_influence import variance_inflation_factor
+import os
+
+# get file root
+user_profile = os.environ["USERPROFILE"]
+file_root = f"{user_profile}\\OneDrive\\Documents\\GitHub\\league_predictions"
 
 # read the data   
-data_oe = pd.read_csv("2022_match_data.csv")
+data_oe = pd.read_csv(f"{file_root}\\intake\\2022_match_data.csv")
 
 # narrow the data, choose variables that are team defining, not luck, and moderated by a time metric
 data_oe_narrow = data_oe[[
@@ -263,5 +268,5 @@ data_oe_keep_corr = data_sides_merged[[
 ]]
 
 # save the data to csv
-data_oe_keep_corr.to_csv("data_oe_training.csv", index = False)
+data_oe_keep_corr.to_csv(f"{file_root}\\working\\data_oe_training.csv", index = False)
 print(f"\nNOTE: Final number of columns: {data_oe_keep_corr.shape[1]}")

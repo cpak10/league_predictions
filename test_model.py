@@ -1,13 +1,18 @@
 from tensorflow import keras
 import pandas as pd
 import joblib
+import os
+
+# get file root
+user_profile = os.environ["USERPROFILE"]
+file_root = f"{user_profile}\\OneDrive\\Documents\\GitHub\\league_predictions"
 
 # bring in the model
-model = keras.models.load_model("saved_model/league_oe_data")
-normalizer = joblib.load("std_scaler.bin")
+model = keras.models.load_model(f"{file_root}\\working\\model_sequential")
+normalizer = joblib.load(f"{file_root}\\working\\std_scaler.bin")
 
 # bring in the data to predict
-data_predict = pd.read_csv("data_oe_training.csv")
+data_predict = pd.read_csv(f"{file_root}\\working\\data_oe_training.csv")
 data_predict_result = data_predict.pop("result")
 
 # predict one observation

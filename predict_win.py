@@ -13,15 +13,19 @@ team_red = "Team Liquid"
 date = "20221129"
 new_data = 0
 
+# get file root
+user_profile = os.environ["USERPROFILE"]
+file_root = f"{user_profile}\\OneDrive\\Documents\\GitHub\\league_predictions"
+
 # update the date before running
 if new_data == 0:
-    data_oe = pd.read_csv(f"2022_match_data.csv")
+    data_oe = pd.read_csv(f"{file_root}\\intake\\2022_match_data.csv")
 
 # saving new data
 if new_data == 1:
     link_oe_data = f"https://oracleselixir-downloadable-match-data.s3-us-west-2.amazonaws.com/2022_LoL_esports_match_data_from_OraclesElixir_{date}.csv"
     data_oe = pd.read_csv(link_oe_data)
-    data_oe.to_csv(f"oe_extract_{date}.csv", index = False)
+    data_oe.to_csv(f"{file_root}\\intake\\oe_extract_{date}.csv", index = False)
 
 # bring down only the relevant columns
 data_oe_correlated = data_oe[[
@@ -136,8 +140,8 @@ data_sides_order = data_sides_merged[[
 ]]
 
 # bring in the model for sequential
-normalizer = joblib.load("std_scaler.bin")
-model = keras.models.load_model("saved_model/league_oe_data")
+normalizer = joblib.load(f"{file_root}\\working\\std_scaler.bin")
+model = keras.models.load_model(f"{file_root}\\working\\model_sequential")
 prediction = model.predict(normalizer.transform(data_sides_order))
 dict_prediction = {}
 for i in range(len(data_date_list)):
@@ -146,8 +150,8 @@ for i in range(len(data_date_list)):
 data_date_prediction = pd.DataFrame.from_dict(dict_prediction, orient = "index", columns = ["date", "prediction", "Team"])
 
 # bring in the model for random forest
-normalizer_rf = joblib.load("std_scaler_rf.bin")
-model_rf = joblib.load("model_random_forest.bin")
+normalizer_rf = joblib.load(f"{file_root}\\working\\std_scaler_rf.bin")
+model_rf = joblib.load(f"{file_root}\\working\\model_random_forest.bin")
 prediction_rf = model_rf.predict_proba(normalizer_rf.transform(data_sides_order))
 dict_prediction_rf = {}
 for i in range(len(data_date_list)):
@@ -163,9 +167,7 @@ print(f"\nNOTE: Last Week of Full Data: {date_final}")
 print(f"NOTE: Sequential model predictions for win: {team_blue} ({100 - prediction_final}%), {team_red} ({prediction_final}%)")
 print(f"NOTE: Random forest model predictions for win: {team_blue} ({100 - prediction_final_rf}%), {team_red} ({prediction_final_rf}%)")
 
-user_profile = os.environ['USERPROFILE']
-file_root = f"{user_profile}\\OneDrive\\Documents\\League Predictions\\"
-file_path = f"{file_root}{date_final}_{team_blue}_{team_red}.txt"
+file_path = f"{file_root}\\outputs\\{date_final}_{team_blue}_{team_red}.txt"
 with open(file_path, "w") as file:
     file.write(f"""
 Last Week of Full Data: {date_final}
@@ -182,7 +184,7 @@ plt.title(f"Win Predictions For {team_blue} v. {team_red} (Seq)")
 plt.xticks(rotation = 90)
 plt.xlabel("End of Week Date")
 plt.ylabel("% Chance of Win")
-plt.savefig(f"{file_root}{date_final}_{team_blue}_{team_red}_seq.png")
+plt.savefig(f"{file_root}\\outputs\\{date_final}_{team_blue}_{team_red}_seq.png")
 
 # plot data for random forest
 plt.figure(2)
@@ -193,7 +195,7 @@ plt.title(f"Win Predictions For {team_blue} v. {team_red} (RF)")
 plt.xticks(rotation = 90)
 plt.xlabel("End of Week Date")
 plt.ylabel("% Chance of Win")
-plt.savefig(f"{file_root}{date_final}_{team_blue}_{team_red}_rf.png")
+plt.savefig(f"{file_root}\\outputs\\{date_final}_{team_blue}_{team_red}_rf.png")
 
 # show plots
 plt.show()

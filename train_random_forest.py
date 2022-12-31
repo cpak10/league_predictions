@@ -5,9 +5,14 @@ from sklearn.model_selection import GridSearchCV
 import pandas as pd
 import numpy as np
 import joblib
+import os
+
+# get file root
+user_profile = os.environ["USERPROFILE"]
+file_root = f"{user_profile}\\OneDrive\\Documents\\GitHub\\league_predictions"
 
 # read the training data
-data_import = pd.read_csv("data_oe_training.csv")
+data_import = pd.read_csv(f"{file_root}\\working\\data_oe_training.csv")
 
 # remove the result from the data
 data_labels = data_import.pop("result")
@@ -23,7 +28,7 @@ x_train, x_test, y_train, y_test = train_test_split(
 scaler = StandardScaler()
 x_train_scale = scaler.fit_transform(x_train)
 x_test_scale = scaler.transform(x_test)
-joblib.dump(scaler, 'std_scaler_rf.bin', compress = True)
+joblib.dump(scaler, f"{file_root}\\working\\std_scaler_rf.bin", compress = True)
 
 # set up the random forest model
 model = RandomForestClassifier(n_estimators = 500, random_state = 42)
@@ -96,4 +101,4 @@ for bin in classes_loss:
         print(f"{bin_count} games at or above {int(100 * (1 - bin))}% likelihood (Accuracy: {int(bin_mean * 100)}%)")
 
 # save model
-joblib.dump(model, "model_random_forest.bin")
+joblib.dump(model, f"{file_root}\\working\\model_random_forest.bin")
