@@ -15,8 +15,7 @@ np.random.seed(42)
 tf.random.set_seed(42)
 
 # get file root
-user_profile = os.environ["USERPROFILE"]
-file_root = f"{user_profile}\\OneDrive\\Documents\\GitHub\\league_predictions"
+file_root = "C:\\GitHub\\league_predictions"
 
 # take in the data
 data_oe_intake = pd.read_csv(f"{file_root}\\working\\data_oe_training.csv")

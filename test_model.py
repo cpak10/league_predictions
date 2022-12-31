@@ -1,11 +1,9 @@
 from tensorflow import keras
 import pandas as pd
 import joblib
-import os
 
 # get file root
-user_profile = os.environ["USERPROFILE"]
-file_root = f"{user_profile}\\OneDrive\\Documents\\GitHub\\league_predictions"
+file_root = "C:\\GitHub\\league_predictions"
 
 # bring in the model
 model = keras.models.load_model(f"{file_root}\\working\\model_sequential")

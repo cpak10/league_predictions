@@ -5,11 +5,9 @@ from sklearn.model_selection import GridSearchCV
 import pandas as pd
 import numpy as np
 import joblib
-import os
 
 # get file root
-user_profile = os.environ["USERPROFILE"]
-file_root = f"{user_profile}\\OneDrive\\Documents\\GitHub\\league_predictions"
+file_root = "C:\\GitHub\\league_predictions"
 
 # read the training data
 data_import = pd.read_csv(f"{file_root}\\working\\data_oe_training.csv")

@@ -1,12 +1,10 @@
 import pandas as pd
-import os
 
 # input
 league = "LCK"
 
 # get file root
-user_profile = os.environ["USERPROFILE"]
-file_root = f"{user_profile}\\OneDrive\\Documents\\GitHub\\league_predictions"
+file_root = "C:\\GitHub\\league_predictions"
 
 # read data
 data_oe = pd.read_csv(f"{file_root}\\intake\\2022_match_data.csv")

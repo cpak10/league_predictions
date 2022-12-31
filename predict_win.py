@@ -5,7 +5,6 @@ from tensorflow import keras
 import joblib
 import seaborn
 import matplotlib.pyplot as plt
-import os
 
 # inputs
 team_blue = "Evil Geniuses"
@@ -14,8 +13,7 @@ date = "20221129"
 new_data = 0
 
 # get file root
-user_profile = os.environ["USERPROFILE"]
-file_root = f"{user_profile}\\OneDrive\\Documents\\GitHub\\league_predictions"
+file_root = "C:\\GitHub\\league_predictions"
 
 # update the date before running
 if new_data == 0:
