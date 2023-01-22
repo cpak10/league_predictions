@@ -1,7 +1,7 @@
 import pandas as pd
 
 # input
-league = "LCK"
+league = input("INPUT - Enter league here (e.g. LCK, LCS, LPL): ")
 
 # get file root
 file_root = "C:\\GitHub\\league_predictions"

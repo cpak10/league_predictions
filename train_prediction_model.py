@@ -35,7 +35,9 @@ joblib.dump(normalizer, f"{file_root}\\working\\std_scaler.bin", compress = True
 # Build the model
 def get_model():
     model = keras.models.Sequential([
-        keras.layers.Dense(2, input_shape = (48,), kernel_regularizer = keras.regularizers.l2()),
+        keras.layers.Dense(64, input_shape = (48,), kernel_regularizer = keras.regularizers.l2()),
+        keras.layers.Dense(16, kernel_regularizer = keras.regularizers.l2()),
+        keras.layers.Dense(4, kernel_regularizer = keras.regularizers.l2()),
         keras.layers.Dense(1, activation = "sigmoid")
     ])
     model.compile(

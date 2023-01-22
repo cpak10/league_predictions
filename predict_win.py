@@ -7,10 +7,10 @@ import seaborn
 import matplotlib.pyplot as plt
 
 # inputs
-team_blue = "Evil Geniuses"
-team_red = "Team Liquid"
-date = "20221129"
-new_data = 0
+team_blue = input("INPUT - Enter blue side team name: ")
+team_red = input("INPUT - Enter red side team name: ")
+date = input("INPUT - Enter date in yyyymmdd format: ")
+new_data = int(input("INPUT - Enter '1' if new data, else '0': "))
 
 # get file root
 file_root = "C:\\GitHub\\league_predictions"

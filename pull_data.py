@@ -65,7 +65,7 @@ data_oe_narrow = data_oe[[
 print(f"NOTE: Observations in raw data: {data_oe_narrow.shape[0]}")
 
 # only keep team observations
-data_oe_narrow_row = data_oe_narrow[(data_oe_narrow["position"] == "team") & (data_oe_narrow["league"].isin(["LCS", "LCK", "LEC"]))]
+data_oe_narrow_row = data_oe_narrow[(data_oe_narrow["position"] == "team")]
 print(f"NOTE: Observations after keeping team statistics: {data_oe_narrow_row.shape[0]}")
 
 # drop position, drop missing values

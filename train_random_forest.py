@@ -56,8 +56,8 @@ print(f"\nNOTE: Score of the overall model: {int(score * 100)}%")
 
 # create a testing mechanism
 result_by_class = {}
-classes_win = [.8, .7, .5]
-classes_loss = [.2, .3, .49]
+classes_win = [.9, .8, .7, .5]
+classes_loss = [.1, .2, .3, .49]
 
 for pred, prob, result in zip(prediction, predict_prob, y_test):
 
