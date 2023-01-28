@@ -9,15 +9,16 @@ import matplotlib.pyplot as plt
 # inputs
 team_blue = input("INPUT - Enter blue side team name: ")
 team_red = input("INPUT - Enter red side team name: ")
-date = input("INPUT - Enter date in yyyymmdd format: ")
 new_data = int(input("INPUT - Enter '1' if new data, else '0': "))
+if new_data == 1:
+    date = input("INPUT - Enter date in yyyymmdd format: ")
 
 # get file root
 file_root = "C:\\GitHub\\league_predictions"
 
 # update the date before running
 if new_data == 0:
-    data_oe = pd.read_csv(f"{file_root}\\intake\\2022_match_data.csv")
+    data_oe = pd.read_csv(f"{file_root}\\intake\\2023_match_data.csv")
 
 # saving new data
 if new_data == 1:

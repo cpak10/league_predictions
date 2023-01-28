@@ -7,7 +7,7 @@ league = input("INPUT - Enter league here (e.g. LCK, LCS, LPL): ")
 file_root = "C:\\GitHub\\league_predictions"
 
 # read data
-data_oe = pd.read_csv(f"{file_root}\\intake\\2022_match_data.csv")
+data_oe = pd.read_csv(f"{file_root}\\intake\\2023_match_data.csv")
 
 # narrow data
 data_oe_narrow = data_oe[["league", "teamname"]]
