@@ -65,8 +65,8 @@ data_row_date_finder = data_oe_new_key[["row_id", "date"]]
 data_oe_rolling_values = pd.DataFrame()
 for team in data_oe_new_key["teamname"].unique():
     data_oe_team = data_oe_new_key.loc[data_oe_new_key["teamname"] == team].drop(columns = ["teamname", "date"])
-    data_to_stack_mean = data_oe_team.rolling(3, on = "row_id", closed = "both").mean()
-    data_to_stack_std = data_oe_team.rolling(3, on = "row_id", closed = "both").std()
+    data_to_stack_mean = data_oe_team.rolling(9, on = "row_id", closed = "both").mean()
+    data_to_stack_std = data_oe_team.rolling(9, on = "row_id", closed = "both").std()
     data_to_stack = data_to_stack_mean.merge(data_to_stack_std, on = "row_id", how = "left")
     data_to_stack_date = data_to_stack.merge(data_row_date_finder, on = "row_id", how = "left")
     data_to_stack_date["team"] = team

@@ -83,8 +83,8 @@ data_oe_rolling_merge_key = data_oe_new_key[["row_id", "result", "gameid", "side
 data_oe_rolling_values = pd.DataFrame()
 for team in data_oe_new_key["teamname"].unique():
     data_oe_team = data_oe_new_key.loc[data_oe_new_key["teamname"] == team].drop(columns = ["result", "teamname", "date", "gameid", "side"])
-    data_to_stack_mean = data_oe_team.rolling(3, on = "row_id", closed = "left").mean()
-    data_to_stack_std = data_oe_team.rolling(3, on = "row_id", closed = "left").std()
+    data_to_stack_mean = data_oe_team.rolling(9, on = "row_id", closed = "left").mean()
+    data_to_stack_std = data_oe_team.rolling(9, on = "row_id", closed = "left").std()
     data_to_stack = data_to_stack_mean.merge(data_to_stack_std, on = ["row_id"], how = "left")
     data_oe_rolling_values = pd.concat([data_oe_rolling_values, data_to_stack], ignore_index=True, axis=0)
 
